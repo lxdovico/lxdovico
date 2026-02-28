@@ -139,3 +139,21 @@ body::before {
   object-fit: contain;
   z-index: 12;
 }
+
+@media (max-width: 768px) {
+
+  /* logo più in basso */
+  #logo {
+    top: 70px;
+    left: 10px;
+    width: 100px;
+  }
+
+  /* PNG in formato 9:16 (portrait) */
+  #fluteOverlay {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center;
+  }
+}
