@@ -1,0 +1,141 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  color: white;
+  background: url("background.jpg") no-repeat center center;
+  background-size: cover;
+}
+
+/* SOCIAL */
+.social-support {
+  position: fixed;
+  top: 20px;
+  width: 100%;
+  text-align: center;
+  z-index: 30;
+}
+
+.social-support a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: white;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* INSTRUCTION */
+#instruction {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  letter-spacing: 4px;
+  opacity: 0.4;
+  z-index: 30;
+}
+
+/* ABOUT LABEL */
+#aboutLabel {
+  position: fixed;
+  bottom: 90px;
+  right: 10px;
+  width: 80px;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: white;
+  opacity: 0.7;
+  z-index: 30;
+}
+
+/* PNG */
+#fluteOverlay {
+  transition: filter 0.4s ease;
+}
+
+#fluteOverlay.active {
+  filter: brightness(1.4);
+}
+
+/* GLOW SMOOTH */
+#fluteOverlay.active {
+  filter: brightness(1.4);
+}
+
+/* VIDEO SMALL */
+#cornerVideo {
+  position: fixed;
+  bottom: 20px;
+  right: 10px;
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  z-index: 25;
+}
+
+/* COPYRIGHT */
+#copyright {
+  position: fixed;
+  bottom: 5px;
+  width: 100%;
+  text-align: center;
+  font-size: 10px;
+  color: black;
+  opacity: 0.4;
+  z-index: 30;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  color: white;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("background.jpg") no-repeat center center;
+  background-size: cover;
+  z-index: -1;
+}
+
+/* PNG overlay (glow rimane) */
+#fluteOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  pointer-events: auto;
+  transition: filter 0.4s ease;
+  z-index: 10;
+}
+
+/* glow ma sempre BW */
+#fluteOverlay.active {
+  filter: brightness(1.4);
+}
+
+#logo {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  width: 120px;
+  height: auto;
+  object-fit: contain;
+  z-index: 12;
+}
