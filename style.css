@@ -140,20 +140,18 @@ body::before {
   z-index: 12;
 }
 
-@media (max-width: 768px) {
-
-  /* logo più in basso */
-  #logo {
-    top: 70px;
-    left: 10px;
-    width: 100px;
-  }
-
-  /* PNG in formato 9:16 (portrait) */
+@media screen and (max-width: 768px) {
   #fluteOverlay {
-    width: 100vw;
-    height: 100vh;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+
+    /* ruota 90° e trasla per centrare */
+    transform: rotate(90deg) translate(-50%, -50%);
+    transform-origin: center center;
+
+    width: 100vh;  /* altezza del viewport diventa larghezza */
+    height: 100vw; /* larghezza viewport diventa altezza */
     object-fit: cover;
-    object-position: center;
   }
 }
