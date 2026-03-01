@@ -5,32 +5,44 @@
 }
 
 body {
-  height: 100vh;
-  overflow: hidden;
   font-family: Arial, sans-serif;
   color: white;
-  background: url("background.jpg") no-repeat center center;
-  background-size: cover;
+  min-height: 100vh;
+  position: relative;
 }
 
-/* SOCIAL */
+body:not(.about-page) {
+  height: 100vh;
+  overflow: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("background.jpg") no-repeat center center;
+  background-size: cover;
+  z-index: -1;
+  transition: 0.6s ease;
+}
+
+/* SOCIAL + LINKS TOP RIGHT IN COLUMN */
 .social-support {
   position: fixed;
   top: 20px;
-  width: 100%;
-  text-align: center;
+  right: 20px;
+  text-align: right;
   z-index: 30;
 }
 
 .social-support a {
-  margin: 0 15px;
-  text-decoration: none;
-  color: white;
+  display: block;
+  margin: 4px 0;
   font-size: 12px;
   letter-spacing: 3px;
   text-transform: uppercase;
+  color: white;
 }
-
 /* INSTRUCTION */
 #instruction {
   position: fixed;
@@ -39,48 +51,32 @@ body {
   transform: translate(-50%, -50%);
   font-size: 14px;
   letter-spacing: 4px;
-  opacity: 0.4;
+  color: rgba(0,0,0,0.6);
   z-index: 30;
 }
 
-/* ABOUT LABEL */
-#aboutLabel {
-  position: fixed;
-  bottom: 90px;
-  right: 10px;
-  width: 80px;
-  text-align: center;
-  font-size: 10px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: white;
-  opacity: 0.7;
-  z-index: 30;
-}
-
-/* PNG */
+/* FLUTE */
 #fluteOverlay {
-  transition: filter 0.4s ease;
-}
-
-#fluteOverlay.active {
-  filter: brightness(1.4);
-}
-
-/* GLOW SMOOTH */
-#fluteOverlay.active {
-  filter: brightness(1.4);
-}
-
-/* VIDEO SMALL */
-#cornerVideo {
   position: fixed;
-  bottom: 20px;
-  right: 10px;
-  width: 70px;
-  height: 70px;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
   object-fit: cover;
-  z-index: 25;
+  z-index: 5;
+  transition: filter 0.15s ease;
+}
+
+#fluteOverlay.active {
+  filter: brightness(1.15) contrast(1.05);
+}
+
+/* LOGO */
+body:not(.about-page) #logo {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  width: 120px;
+  z-index: 12;
 }
 
 /* COPYRIGHT */
@@ -95,63 +91,266 @@ body {
   z-index: 30;
 }
 
-body {
-  height: 100vh;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
+/* ---------- ABOUT PAGE ---------- */
+
+.about-page {
+  overflow-y: auto;
+  height: auto;
+}
+
+.about-container {
+  max-width: 700px;
+  margin: 140px auto 60px auto;
+  padding: 60px 60px 80px 60px;
+  line-height: 1.6;
+  font-size: 16px;
+  text-align: left;
   color: white;
   position: relative;
+  z-index: 20;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 20px;
 }
 
-body::before {
-  content: "";
+.about-logo {
+  width: 60px;
+  opacity: 0.9;
+  transition: 0.3s ease;
+}
+
+.about-logo:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+.about-flute {
+  width: 100%;
+  margin-top: 60px;
+  opacity: 0.7;
+}
+
+#aboutFlute {
   position: fixed;
   inset: 0;
-  background: url("background.jpg") no-repeat center center;
-  background-size: cover;
-  z-index: -1;
-}
-
-/* PNG overlay (glow rimane) */
-#fluteOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100vw;
   height: 100vh;
   object-fit: cover;
-  pointer-events: auto;
-  transition: filter 0.4s ease;
-  z-index: 10;
+  z-index: 5;
 }
 
-/* glow ma sempre BW */
-#fluteOverlay.active {
-  filter: brightness(1.4);
-}
-
-#logo {
+.about-top {
   position: fixed;
-  top: 10px;
-  left: 10px;
-  width: 120px;
-  height: auto;
-  object-fit: contain;
-  z-index: 12;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
 }
 
-@media screen and (max-width: 768px) {
-  #fluteOverlay {
-    position: fixed;
-    top: 50%;
-    left: 50%;
+.about-logo {
+  width: 70px;
+  opacity: 0.9;
+  transition: 0.3s ease;
+}
 
-    /* ruota 90° e trasla per centrare */
-    transform: rotate(90deg) translate(-50%, -50%);
-    transform-origin: center center;
+.about-logo:hover {
+  opacity: 1;
+}
 
-    width: 100vh;  /* altezza del viewport diventa larghezza */
-    height: 100vw; /* larghezza viewport diventa altezza */
-    object-fit: cover;
+a {
+  text-decoration: none;
+}
+
+/* ABOUT OVERLAY */
+
+#aboutOverlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  padding: 40px;
+}
+
+#aboutOverlay.active {
+  display: flex;
+}
+
+.about-box {
+  max-width: 700px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 60px;
+  border-radius: 20px;
+
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+#aboutLogo {
+  width: 70px;
+  display: block;
+  margin: 0 auto 30px auto;
+  cursor: pointer;
+}
+
+/* BLUR HOME WHEN ABOUT OPEN */
+body.about-open #fluteOverlay,
+body.about-open #logo,
+body.about-open #instruction,
+body.about-open #copyright,
+body.about-open .social-support {
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+/* Blur anche background */
+body.about-open::before {
+  filter: blur(10px);
+  transform: scale(1.05);
+}
+
+/* MOBILE VERSION */
+@media (max-width: 768px) {
+
+  #aboutOverlay {
+    align-items: flex-start;
+    padding-top: 40px;
   }
+
+.about-box {
+  max-width: 700px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 60px;
+  border-radius: 20px;
+
+  background: transparent; /* niente grigio */
+  backdrop-filter: none;   /* niente blur interno */
+  -webkit-backdrop-filter: none;
+
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+  #aboutLogo {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+  }
+
+    .social-support {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: nowrap;
+  }
+
+  .social-support a {
+    font-size: 14px;
+  }
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+
+  /* Social + About sulla stessa riga e più piccoli */
+  .social-support {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: nowrap;
+  }
+
+  .social-support a {
+    font-size: 12px; /* più piccolo così entra tutto */
+    letter-spacing: 1px;
+  }
+
+  /* Logo in basso centrato */
+  .logo,
+  .home-logo {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+
+  /* Logo in basso alla pagina, centrato */
+  .logo,
+  .home-logo {
+    position: static;          /* niente fixed */
+    display: block;
+    margin: 80px auto 30px auto; /* spazio sopra + centrato */
+    text-align: center;
+  }
+
+}
+
+/* Overlay nascosto di default */
+.about-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 1000;
+}
+
+/* Quando attivo */
+.about-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Blur della home */
+.home-content.blur {
+  filter: blur(6px);
+  transition: filter 0.4s ease;
+}
+
+/* Box testo */
+.about-content {
+  max-width: 600px;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  backdrop-filter: blur(5px);
+}
+
+#homeLink {
+  display: block;
+  margin-top: 60px;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: white;
+  opacity: 0.7;
+  transition: 0.3s ease;
+}
+
+#homeLink:hover {
+  opacity: 1;
 }
