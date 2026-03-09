@@ -405,20 +405,43 @@ if (ludoVideo){
 
   let reversed = false;
 
-  ludoVideo.addEventListener("ended", () => {
-
-    reversed = !reversed;
-
-    if (reversed){
-      ludoVideo.playbackRate = -1;
-      ludoVideo.currentTime = ludoVideo.duration;
-    } else {
-      ludoVideo.playbackRate = 1;
-      ludoVideo.currentTime = 0;
-    }
-
+  function playForward(){
+    reversed = false;
+    ludoVideo.playbackRate = 1;
     ludoVideo.play();
+  }
 
+  function playReverse(){
+
+    reversed = true;
+
+    const reverseInterval = setInterval(()=>{
+
+      if (ludoVideo.currentTime <= 0.05){
+        clearInterval(reverseInterval);
+        playForward();
+      } else {
+        ludoVideo.currentTime -= 0.03;
+      }
+
+    },30);
+
+  }
+
+  ludoVideo.addEventListener("ended", ()=>{
+    playReverse();
   });
 
+  playForward();
+
 }
+
+// CLICK OVUNQUE -> CHIUDI EMAIL
+
+document.addEventListener("click", () => {
+
+  if (emailVisible){
+    hideEmail();
+  }
+
+});
