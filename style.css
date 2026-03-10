@@ -681,6 +681,22 @@ body:not(.about-page) #logo{
 
 }
 
+@media (max-width:768px){
+
+  .about-portfolio{
+
+    position:static !important;
+
+    display:block;
+
+    width:160px;
+
+    margin:10px auto 40px auto;
+
+  }
+
+}
+
 html,body{
   width:100%;
   height:100%;
@@ -804,6 +820,35 @@ html, body{
 
   transition: transform 0.3s ease, filter 0.3s ease;
   cursor: pointer;
+
+}
+
+/* PORTFOLIO IMAGE */
+
+.about-portfolio {
+
+  position: fixed;
+
+  bottom: 40px;
+  right: 240px; /* spostata a sinistra rispetto a contact */
+
+  width: 100px;
+
+  z-index: 2000;
+  opacity: 0.9;
+
+  transition: transform 0.3s ease, filter 0.3s ease;
+  cursor: pointer;
+
+}
+
+.about-portfolio:hover {
+
+  transform: scale(1.05);
+
+  filter: brightness(1.4) blur(3px);
+
+  animation: blurPulse 1.2s infinite alternate;
 
 }
 

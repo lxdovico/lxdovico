@@ -397,6 +397,64 @@ if (contact){
 
 }
 
+// PORTFOLIO CLICK -> LINECHECK
+
+const portfolio = document.querySelector(".about-portfolio");
+
+let portfolioVisible = false;
+let portfolioElement = null;
+
+function hidePortfolio(){
+
+  if (!portfolioElement) return;
+
+  portfolioElement.classList.remove("show");
+
+  setTimeout(()=>{
+
+    if (portfolioElement){
+      portfolioElement.remove();
+      portfolioElement = null;
+    }
+
+    portfolioVisible = false;
+
+  },800);
+
+}
+
+if (portfolio){
+
+  portfolio.addEventListener("click",(e)=>{
+
+  playRandomDrum();
+
+  e.stopPropagation();
+
+    if (!portfolioVisible){
+
+      portfolioElement = document.createElement("img");
+      portfolioElement.src = "linecheck.jpg";
+      portfolioElement.className = "email-popup";
+
+      document.body.appendChild(portfolioElement);
+
+      requestAnimationFrame(()=>{
+        portfolioElement.classList.add("show");
+      });
+
+      portfolioVisible = true;
+
+    } else {
+
+      hidePortfolio();
+
+    }
+
+  });
+
+}
+
 // LUDO VIDEO FORWARD / REVERSE LOOP
 
 const ludoVideo = document.getElementById("ludoVideo");
@@ -442,6 +500,10 @@ document.addEventListener("click", () => {
 
   if (emailVisible){
     hideEmail();
+  }
+
+  if (portfolioVisible){
+    hidePortfolio();
   }
 
 });
