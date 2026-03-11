@@ -1084,3 +1084,26 @@ html, body{
   }
 
 }
+
+/* PORTFOLIO SLIDESHOW */
+
+.portfolio-layer{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:3000;
+  pointer-events:none;
+}
+
+.portfolio-slide{
+  position:absolute;
+  width:260px;
+  opacity:0;
+  transition:opacity 1.2s ease;
+}
+
+.portfolio-slide.show{
+  opacity:1;
+}

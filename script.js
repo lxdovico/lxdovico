@@ -397,29 +397,47 @@ if (contact){
 
 }
 
-// PORTFOLIO CLICK -> LINECHECK
+// PORTFOLIO SLIDESHOW (CROSSFADE LOOP)
 
 const portfolio = document.querySelector(".about-portfolio");
 
 let portfolioVisible = false;
-let portfolioElement = null;
+let portfolioLayer = null;
+let slides = [];
+let portfolioInterval = null;
+
+const portfolioImages = [
+  "linecheck.jpg",
+  "brighton.jpg",
+  "overground.jpg",
+  "tsloe.jpg"
+];
+
+let currentSlide = 0;
 
 function hidePortfolio(){
 
-  if (!portfolioElement) return;
+  if (!portfolioLayer) return;
 
-  portfolioElement.classList.remove("show");
+  clearInterval(portfolioInterval);
 
-  setTimeout(()=>{
+  portfolioLayer.remove();
 
-    if (portfolioElement){
-      portfolioElement.remove();
-      portfolioElement = null;
-    }
+  portfolioLayer = null;
+  slides = [];
+  portfolioVisible = false;
+  currentSlide = 0;
 
-    portfolioVisible = false;
+}
 
-  },800);
+function nextSlide(){
+
+  const next = (currentSlide + 1) % portfolioImages.length;
+
+  slides[next].classList.add("show");
+  slides[currentSlide].classList.remove("show");
+
+  currentSlide = next;
 
 }
 
@@ -427,23 +445,32 @@ if (portfolio){
 
   portfolio.addEventListener("click",(e)=>{
 
-  playRandomDrum();
-
-  e.stopPropagation();
+    playRandomDrum();
+    e.stopPropagation();
 
     if (!portfolioVisible){
 
-      portfolioElement = document.createElement("img");
-      portfolioElement.src = "linecheck.jpg";
-      portfolioElement.className = "email-popup";
+      portfolioLayer = document.createElement("div");
+      portfolioLayer.className = "portfolio-layer";
 
-      document.body.appendChild(portfolioElement);
+      document.body.appendChild(portfolioLayer);
 
-      requestAnimationFrame(()=>{
-        portfolioElement.classList.add("show");
+      portfolioImages.forEach((src,i)=>{
+
+        const img = document.createElement("img");
+        img.src = src;
+        img.className = "portfolio-slide";
+
+        if(i===0) img.classList.add("show");
+
+        portfolioLayer.appendChild(img);
+        slides.push(img);
+
       });
 
       portfolioVisible = true;
+
+      portfolioInterval = setInterval(nextSlide,2000);
 
     } else {
 
